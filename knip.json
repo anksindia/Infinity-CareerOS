@@ -1,0 +1,25 @@
+{
+	"$schema": "https://unpkg.com/knip@6/schema.json",
+	"tags": [
+		"-lintignore"
+	],
+	"ignoreBinaries": [
+		"pdftotext"
+	],
+	"workspaces": {
+		"apps/web": {
+			"entry": [
+				"lingui.config.ts",
+				"vitest.config.ts"
+			],
+			"vitest": {
+				"config": []
+			}
+		},
+		"tooling": {
+			"entry": [
+				"**/*.mjs"
+			]
+		}
+	}
+}

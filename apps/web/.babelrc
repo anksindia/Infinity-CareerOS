@@ -1,0 +1,18 @@
+{
+	"presets": [
+		[
+			"next/babel",
+			{
+				"preset-env": {
+					"targets": {
+						"chrome": "111",
+						"edge": "111",
+						"firefox": "111",
+						"safari": "16.4"
+					}
+				}
+			}
+		]
+	],
+	"plugins": ["@lingui/babel-plugin-lingui-macro", "babel-plugin-react-compiler"]
+}

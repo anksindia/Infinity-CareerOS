@@ -1,0 +1,179 @@
+{
+	"$schema": "https://v2-11-5.turborepo.dev/schema.json",
+	"ui": "stream",
+	"boundaries": {
+		"dependencies": {
+			"deny": [
+				"web"
+			]
+		},
+		"implicitDependencies": [
+			"vite-plus",
+			"@testing-library/jest-dom",
+			"@testing-library/react",
+			"@testing-library/user-event"
+		],
+		"tags": {
+			"app:server": {
+				"dependencies": {
+					"deny": [
+						"app:web",
+						"runtime:browser"
+					]
+				}
+			},
+			"app:mobile": {
+				"dependencies": {
+					"deny": [
+						"app:server",
+						"app:web",
+						"runtime:server",
+						"runtime:browser"
+					]
+				}
+			},
+			"runtime:server": {
+				"dependencies": {
+					"deny": [
+						"app:web",
+						"runtime:browser"
+					]
+				}
+			},
+			"runtime:browser": {
+				"dependencies": {
+					"deny": [
+						"app:server",
+						"runtime:server"
+					]
+				}
+			},
+			"runtime:native": {
+				"dependencies": {
+					"deny": [
+						"app:web",
+						"app:server",
+						"runtime:server",
+						"runtime:browser"
+					]
+				}
+			},
+			"runtime:universal": {
+				"dependencies": {
+					"deny": [
+						"app:web",
+						"app:server",
+						"runtime:server"
+					]
+				}
+			},
+			"role:domain": {
+				"dependencies": {
+					"deny": [
+						"app:web",
+						"app:server",
+						"role:adapter",
+						"role:infra"
+					]
+				}
+			},
+			"role:ui": {
+				"dependencies": {
+					"deny": [
+						"app:web",
+						"app:server",
+						"runtime:server",
+						"role:infra"
+					]
+				}
+			}
+		}
+	},
+	"tasks": {
+		"transit": {
+			"dependsOn": [
+				"^transit"
+			]
+		},
+		"build": {
+			"inputs": [
+				"$TURBO_DEFAULT$",
+				"$TURBO_ROOT$/package.json"
+			],
+			"outputs": [
+				"dist/**",
+				".vercel/**"
+			],
+			"dependsOn": [
+				"transit"
+			],
+			"env": [
+				"NODE_ENV"
+			]
+		},
+		"typecheck": {
+			"dependsOn": [
+				"transit"
+			]
+		},
+		"test": {
+			"dependsOn": [
+				"transit"
+			],
+			"env": [
+				"NODE_ENV"
+			],
+			"inputs": [
+				"$TURBO_DEFAULT$"
+			]
+		},
+		"test:coverage": {
+			"dependsOn": [
+				"transit"
+			],
+			"env": [
+				"NODE_ENV"
+			],
+			"inputs": [
+				"$TURBO_DEFAULT$"
+			],
+			"outputs": [
+				"coverage/**"
+			]
+		},
+		"test:ci": {
+			"dependsOn": [
+				"transit"
+			],
+			"env": [
+				"NODE_ENV"
+			],
+			"inputs": [
+				"$TURBO_DEFAULT$"
+			],
+			"outputs": [
+				"reports/**"
+			]
+		},
+		"dev": {
+			"cache": false,
+			"persistent": true
+		},
+		"start": {
+			"cache": false,
+			"persistent": true
+		},
+		"lingui:extract": {
+			"cache": false
+		}
+	},
+	"globalDependencies": [
+		"vitest.shared.mts",
+		"vitest.setup.ts",
+		"vite.config.ts"
+	],
+	"globalPassThroughEnv": [
+		"NODE_ENV",
+		"VERCEL"
+	]
+}
